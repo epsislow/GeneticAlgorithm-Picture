@@ -5,6 +5,10 @@ function rand_range(a, b) {
   return Math.random() * (b - a) + a;
 }
 
+function rand_new_range(a, b) {
+ return Math.random() * (b - a) + a;
+}
+
 function rand_normalish() {
   const r = Math.random() + Math.random() + Math.random() + Math.random();
   return (r / 4.0) * 2.0 - 1;
@@ -34,7 +38,7 @@ class Population {
   }
 
   _CreateRandomGene() {
-    return this._params.gene.ranges.map(r => rand_range(r[0], r[1]));
+	return this._params.gene.ranges.map(r => rand_range(r[0], r[1]));
   }
 
   _CreateRandomgenotype() {
@@ -196,7 +200,7 @@ class GeneticAlgorithmDemo {
     this._statsText1 = document.getElementById('statsText');
     this._statsText2 = document.getElementById('numbersText');
     this._sourceImg = document.getElementById('sourceImg');
-    this._sourceImg.src = 'assets/square.jpg';
+    this._sourceImg.src = 'assets/7.jpg';
     this._sourceImg.onload = () => {
       const ctx = this._sourceCanvas.getContext('2d');
 
@@ -263,16 +267,16 @@ class GeneticAlgorithmDemo {
     const params = {
       population_size: 512,
       genotype: {
-        size: 64,
+        size: 25,
         max_size: 1000,
         generations_per_increase: 50,
-        growth_per_increase: 1
+        growth_per_increase: 20
       },
       gene: GENE_LINE,
       mutation: {
         magnitude: 0.25,
         odds: 0.1,
-        decay: 0,
+        decay: 0.01,
       }
     };
 

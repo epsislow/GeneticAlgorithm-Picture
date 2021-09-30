@@ -65,11 +65,15 @@ function DrawTexture_LINE(genotype, dstWidth, dstHeight) {
     const g = gene[1] * 255;
     const b = gene[2] * 255;
     const a = lerp(gene[3], 0.05, 0.25);
-    const lw = gene[4] * dstWidth * 0.25;
+
+    const lw = gene[4] * dstWidth * 0.125;
     const x1 = gene[5] * dstWidth;
     const y1 = gene[6] * dstHeight;
-    const x2 = gene[7] * dstWidth;
-    const y2 = gene[8] * dstHeight;
+    //const x2 = gene[7] * dstWidth;
+    //const y2 = gene[8] * dstHeight;
+	const x2 = x1 + gene[7] * dstWidth* 0.125; 
+	const y2 = y1;
+    //const y2 = y1 + gene[8] * dstHeight* 0.25;
     ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
     ctx.lineWidth = lw;
     ctx.beginPath();
