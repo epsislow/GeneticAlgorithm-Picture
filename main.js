@@ -201,7 +201,7 @@ class GeneticAlgorithmDemo {
     this._statsText1 = document.getElementById('statsText');
     this._statsText2 = document.getElementById('numbersText');
     this._sourceImg = document.getElementById('sourceImg');
-    this._sourceImg.src = 'assets/tt.jpg';
+    this._sourceImg.src = 'assets/8.jpg';
     this._sourceImg.onload = () => {
       const ctx = this._sourceCanvas.getContext('2d');
 
