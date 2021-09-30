@@ -34,6 +34,7 @@ class Population {
         _ => ({fitness: 1, genotype: this._CreateRandomgenotype()}));
     this._lastGeneration = null;
     this._generations = 0;
+	this._startTimeInSec = 0;
     this._callback = null;
   }
 
@@ -200,7 +201,7 @@ class GeneticAlgorithmDemo {
     this._statsText1 = document.getElementById('statsText');
     this._statsText2 = document.getElementById('numbersText');
     this._sourceImg = document.getElementById('sourceImg');
-    this._sourceImg.src = 'assets/7.jpg';
+    this._sourceImg.src = 'assets/tt.jpg';
     this._sourceImg.onload = () => {
       const ctx = this._sourceCanvas.getContext('2d');
 
@@ -232,6 +233,8 @@ class GeneticAlgorithmDemo {
 
     this._sourceCanvas = document.getElementById('source');
     this._targetCanvas = document.getElementById('target');
+	
+	this._startTimeInSec = Math.round(new Date().getTime() / 1000);
   }
 
   _InitPopulation() {
@@ -269,7 +272,7 @@ class GeneticAlgorithmDemo {
       genotype: {
         size: 25,
         max_size: 1000,
-        generations_per_increase: 50,
+        generations_per_increase: 100,
         growth_per_increase: 20
       },
       gene: GENE_LINE,
@@ -290,8 +293,11 @@ class GeneticAlgorithmDemo {
 
       const ctx = this._targetCanvas.getContext('2d');
       ctx.putImageData(hd.result.imageData, 0, 0);
+	  
+	  const timeInSec = new Date().getTime() / 1000 - this._startTimeInSec;
 
       this._statsText2.innerText =
+	      (new Date(timeInSec * 1000).toISOString().substr(14, 5)) + '\n' +
           this._population._generations + '\n' +
           this._population.Fittest().fitness.toFixed(3) + '\n' +
           this._population._population.length + '\n' +
@@ -300,6 +306,7 @@ class GeneticAlgorithmDemo {
     this._population.Run(this._sourceLODData);
 
     this._statsText1.innerText =
+		'Time:\n'+
         'Generation:\n' +
         'Fitness:\n' +
         'Population:\n' +
@@ -307,4 +314,6 @@ class GeneticAlgorithmDemo {
   }
 }
 
+
 const _DEMO = new GeneticAlgorithmDemo();
+window.d = _DEMO;
